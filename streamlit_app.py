@@ -2,6 +2,8 @@
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
+import requests
+
 
 # Write directly to the app
 st.title(f":cup_with_straw: Customize your Smoothie:cup_with_straw:")
@@ -10,10 +12,9 @@ st.write(
   """
 )
 
-option = st.selectbox("What is your favourite fruit?",
-                     ("Banana", "Strawberries", "Peaches"))
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
 
-st.write("Your favourite fruit is:", option)
 name_on_order = st.text_input("Name on Smoothie")
 st.write(f"the name on your smoothie will be:{name_on_order}")
 
